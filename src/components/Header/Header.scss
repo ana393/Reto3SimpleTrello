@@ -1,0 +1,11 @@
+@import "../../sass/variables.scss";
+
+header {
+  padding: 0.5em;
+  text-align: center;
+  background-color: #4c554d;
+  h2 {
+    font-style: italic;
+    color: $header;
+  }
+}

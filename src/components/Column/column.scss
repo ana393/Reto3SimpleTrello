@@ -1,0 +1,14 @@
+@import "../../sass/variables.scss";
+
+.card-content {
+  margin: 0.5rem;
+  background-color: $card-color;
+  line-height: 1.4;
+  border-radius: 5px;
+  width: 300px;
+  padding: 1rem;
+  > h4 {
+    color: cornsilk;
+    text-align: center;
+  }
+}

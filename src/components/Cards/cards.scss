@@ -1,0 +1,29 @@
+@import "../../sass/variables.scss";
+.do {
+  display: flex;
+  background-color: $button-color;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 2px;
+  border-radius: 8px;
+  margin: 0.5rem;
+  box-shadow: 5px 5px 5px $shadow;
+  width: 250px;
+  cursor: pointer;
+  > span {
+    width: 100%;
+    flex-grow: 1;
+    padding: 0.2em;
+    text-align: left;
+  }
+  > div {
+    justify-items: flex-end;
+    padding: 0.2em;
+  }
+  .Remove {
+    border-radius: 8px;
+    border: none;
+    &:hover {
+      background: $header;
+    }
+  }
+}
