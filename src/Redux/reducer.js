@@ -14,9 +14,9 @@ export const initState = [
     title: "List Nr.2",
     id: 1,
     cards: [
-      { id: "1", content: "create web components" },
-      { id: "2", content: "connect component to redux store " },
-      { id: "3", content: "add/remove functionality " },
+      { id: "4", content: "create web components" },
+      { id: "5", content: "connect component to redux store " },
+      { id: "6", content: "add/remove functionality " },
     ],
   },
 ];

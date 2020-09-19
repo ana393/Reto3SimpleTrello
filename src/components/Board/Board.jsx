@@ -3,15 +3,23 @@ import Column from '../Column/Column';
 import { connect } from 'react-redux';
 import NewInput from '../NewInput/NewInput';
 import './Board.scss';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 
 const Board = ({ lists }) => {
 
+    const onDragEnd = () => {
+
+    }
+
     return (
-        <div className="row">
-            {lists.map(list => <Column listID={list.id} key={list.id} title={list.title} cards={list.cards} />)}
-            <NewInput list />
-        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+
+            <div className="row">
+                {lists.map(list => <Column listID={list.id} key={list.id} title={list.title} cards={list.cards} />)}
+                <NewInput list />
+            </div>
+        </DragDropContext>
     )
 }
 
