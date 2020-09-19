@@ -60,6 +60,23 @@ const listsReducer = (state = initState, action) => {
         }
       });
       return removeCardState;
+
+    case ACTIONS.DRAGGED:
+      const {
+        droppableIdStart,
+        droppableIdEnd,
+        droppableIndexStart,
+        droppableIndexEnd,
+        draggableId,
+      } = action.payload;
+      const DropState = [...state];
+      //drag and drop in the same column
+      if (droppableIdStart === droppableIdEnd) {
+        const list = state.find((list) => droppableIdStart);
+        const card = list.cards.splice(droppableIndexStart, 1);
+        list.cards.splice(droppableIndexEnd, 0, ...card);
+      }
+      return DropState;
     default:
       return state;
   }
