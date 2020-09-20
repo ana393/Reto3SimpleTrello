@@ -8,8 +8,8 @@ import { sort } from '../../actions/SortAction';
 
 
 const Board = props => {
-    const onDragEnd = outcome => {
-        const { destination, source, draggableId } = outcome;
+    const onDragEnd = (outcome) => {
+        const { destination, source } = outcome;
         if (!destination) {
             return;
         }
@@ -18,13 +18,13 @@ const Board = props => {
             destination.droppableId,
             source.index,
             destination.index,
-            draggableId
+
         ))
     }
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <div className="row">
-                {props.lists.map(list => <Column listID={list.id} key={list.id} title={list.title} cards={list.cards} />)}
+                {props.lists.map((list, index) => <Column listID={list.id} index={index} key={list.id} title={list.title} cards={list.cards} />)}
                 <NewInput list />
             </div>
         </DragDropContext>

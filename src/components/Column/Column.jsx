@@ -12,7 +12,7 @@ const Column = ({ title, cards, listID }) => {
                     <h4>{title} </h4>
                     <div className="todolist">
                         {cards.map((card, index) => (
-                            <Showcard card={card} index={index} key={card.id} listID={listID} content={card.content} id={card.id} />
+                            <Showcard index={index} key={card.id} card={card} listID={listID} content={card.content} id={card.id} />
                         ))}
                     </div>
                     <NewInput listID={listID} />
