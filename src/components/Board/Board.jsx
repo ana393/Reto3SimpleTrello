@@ -9,7 +9,7 @@ import { sort } from '../../actions/SortAction';
 
 const Board = props => {
     const onDragEnd = (outcome) => {
-        const { destination, source, draggableId, type } = outcome;
+        const { destination, source, type } = outcome;
         if (!destination) {
             return;
         }
@@ -18,7 +18,6 @@ const Board = props => {
             destination.droppableId,
             source.index,
             destination.index,
-            draggableId,
             type
         ))
     }

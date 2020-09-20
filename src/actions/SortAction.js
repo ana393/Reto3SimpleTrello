@@ -5,7 +5,6 @@ export const sort = (
   droppableIdEnd,
   droppableIndexStart,
   droppableIndexEnd,
-  draggableId,
   type
 ) => {
   return {
@@ -15,7 +14,6 @@ export const sort = (
       droppableIdEnd,
       droppableIndexStart,
       droppableIndexEnd,
-      draggableId,
       type,
     },
   };
