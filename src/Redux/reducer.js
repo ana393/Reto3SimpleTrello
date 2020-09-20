@@ -3,20 +3,23 @@ import { ACTIONS } from "../actions/actionsTypes";
 export const initState = [
   {
     title: "List Nr.1",
-    id: 0,
+    id: `list-${0}`,
     cards: [
-      { id: "1", content: "create react-app" },
-      { id: "2", content: "install needed packages for the project" },
-      { id: "3", content: "react-dom, react-redux, bootstrap, node-sass" },
+      { id: `card-${0}`, content: "create react-app" },
+      { id: `card-${1}`, content: "install needed packages for the project" },
+      {
+        id: `card-${2}`,
+        content: "react-dom, react-redux, bootstrap, node-sass",
+      },
     ],
   },
   {
     title: "List Nr.2",
-    id: 1,
+    id: `list-${1}`,
     cards: [
-      { id: "4", content: "create web components" },
-      { id: "5", content: "connect component to redux store " },
-      { id: "6", content: "add/remove functionality " },
+      { id: `card-${3}`, content: "create web components" },
+      { id: `card-${4}`, content: "connect component to redux store " },
+      { id: `card-${5}`, content: "add/remove functionality " },
     ],
   },
 ];
@@ -27,7 +30,7 @@ const listsReducer = (state = initState, action) => {
       const List = {
         title: action.payload,
         cards: [],
-        id: Date.now(),
+        id: `list-${Date.now()}`,
       };
       return [...state, List];
 
@@ -67,14 +70,21 @@ const listsReducer = (state = initState, action) => {
         droppableIdEnd,
         droppableIndexStart,
         droppableIndexEnd,
-        draggableId,
       } = action.payload;
       const DropState = [...state];
       //drag and drop in the same column
       if (droppableIdStart === droppableIdEnd) {
-        const list = state.find((list) => droppableIdStart);
-        const card = list.cards.splice(droppableIndexStart, 1);
-        list.cards.splice(droppableIndexEnd, 0, ...card);
+        const col = state.find((list) => droppableIdStart === list.id);
+        console.log(col);
+        const card = col.cards.splice(droppableIndexStart, 1);
+        col.cards.splice(droppableIndexEnd, 0, ...card);
+      }
+      //drag and drop cards between columns
+      if (droppableIdStart !== droppableIdEnd) {
+        const listStart = state.find((list) => droppableIdStart === list.id);
+        const card = listStart.cards.splice(droppableIndexStart, 1);
+        const listEnd = state.find((list) => droppableIdEnd === list.id);
+        listEnd.cards.splice(droppableIndexEnd, 0, ...card);
       }
       return DropState;
     default:
