@@ -36,7 +36,7 @@ const listsReducer = (state = initState, action) => {
 
     case ACTIONS.ADD_CARD:
       const newCard = {
-        id: Date.now(),
+        id: `card-${Date.now()}`,
         content: action.payload.content,
       };
       const newState = state.map((list) => {
@@ -70,8 +70,15 @@ const listsReducer = (state = initState, action) => {
         droppableIdEnd,
         droppableIndexStart,
         droppableIndexEnd,
+        type,
       } = action.payload;
       const DropState = [...state];
+      //drag/drop columns
+      if (type === "column") {
+        const column = DropState.splice(droppableIndexStart, 1);
+        DropState.splice(droppableIndexEnd, 0, ...column);
+        return DropState;
+      }
       //drag and drop in the same column
       if (droppableIdStart === droppableIdEnd) {
         const col = state.find((list) => droppableIdStart === list.id);

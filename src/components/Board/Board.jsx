@@ -3,13 +3,13 @@ import Column from '../Column/Column';
 import { connect } from 'react-redux';
 import NewInput from '../NewInput/NewInput';
 import './Board.scss';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../../actions/SortAction';
 
 
 const Board = props => {
     const onDragEnd = (outcome) => {
-        const { destination, source } = outcome;
+        const { destination, source, draggableId, type } = outcome;
         if (!destination) {
             return;
         }
@@ -18,14 +18,22 @@ const Board = props => {
             destination.droppableId,
             source.index,
             destination.index,
-
+            draggableId,
+            type
         ))
     }
     return (
         <DragDropContext onDragEnd={onDragEnd}>
-            <div className="row">
-                {props.lists.map((list, index) => <Column listID={list.id} index={index} key={list.id} title={list.title} cards={list.cards} />)}
-                <NewInput list />
+            <div>
+                <Droppable droppableId="Board" direction="horizontal" type="column">
+                    {provided => (
+                        <div className="row" {...provided.droppableProps} ref={provided.innerRef}>
+                            {props.lists.map((list, index) => <Column listID={list.id} index={index} key={list.id} title={list.title} cards={list.cards} />)}
+                            <NewInput list />
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
             </div>
         </DragDropContext>
     )
